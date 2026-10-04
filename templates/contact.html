@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Контакты — DKORWORLD2{% endblock %}
+{% block content %}
+<section class="page-hero contact-page-hero"><div class="container"><span class="kicker">Контакты</span><h1>Расскажите о задаче</h1><p>Не нужно составлять техническое задание. Достаточно описать бизнес, текущий процесс и что хочется перестать делать вручную.</p></div></section>
+<section class="section pt-0">
+    <div class="container"><div class="contact-page-grid">
+        <div class="contact-info-panel tilt-card" data-tilt>
+            <h2>Что написать в первом сообщении</h2>
+            <div class="contact-prompt"><span>1</span><p><strong>Чем занимается бизнес</strong><br>Например: СТО, онлайн-консультации, услуги, небольшой магазин.</p></div>
+            <div class="contact-prompt"><span>2</span><p><strong>Что сейчас делается вручную</strong><br>Ответы, запись, перенос заявок, поиск информации, уведомления.</p></div>
+            <div class="contact-prompt"><span>3</span><p><strong>Какой результат нужен</strong><br>Собрать заявки в одном месте, разгрузить менеджера, связать несколько сервисов.</p></div>
+            <div class="direct-box"><a href="https://t.me/dimaseo2" target="_blank" rel="noopener"><i class="bi bi-telegram"></i><span><small>Telegram</small>@dimaseo2</span></a><a href="mailto:seodom222@gmail.com"><i class="bi bi-envelope"></i><span><small>Email</small>seodom222@gmail.com</span></a><div><i class="bi bi-geo-alt"></i><span><small>Формат</small>Москва · онлайн по России</span></div></div>
+        </div>
+        <div class="contact-form-card large-form">
+            <form method="POST" action="{{ url_for('contact') }}" id="contactForm">{{ form.hidden_tag() }}
+                <div class="form-row"><div>{{ form.name.label(class="form-label") }}{{ form.name(class="form-control" + (" is-invalid" if form.name.errors else ""), placeholder="Как к вам обращаться") }}{% for error in form.name.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}</div><div>{{ form.email.label(class="form-label") }}{{ form.email(class="form-control" + (" is-invalid" if form.email.errors else ""), placeholder="name@example.com") }}{% for error in form.email.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}</div></div>
+                <div class="form-row"><div>{{ form.phone.label(class="form-label") }}{{ form.phone(class="form-control" + (" is-invalid" if form.phone.errors else ""), placeholder="+7 (999) 123-45-67") }}{% for error in form.phone.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}</div><div>{{ form.subject.label(class="form-label") }}{{ form.subject(class="form-select" + (" is-invalid" if form.subject.errors else "")) }}{% for error in form.subject.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}</div></div>
+                <div>{{ form.message.label(class="form-label") }}{{ form.message(class="form-control", rows="8", placeholder="Например: у нас СТО, заявки приходят в Telegram и WhatsApp, часть теряется. Хотим собирать обращения в одном месте.") }}{% for error in form.message.errors %}<div class="invalid-feedback d-block">{{ error }}</div>{% endfor %}<div class="form-text">Минимум 10 символов, максимум 1000.</div></div>
+                <button type="submit" class="btn btn-primary btn-lg w-100 mt-4">Отправить задачу <i class="bi bi-send"></i></button>
+            </form>
+        </div>
+    </div></div>
+</section>
+{% endblock %}

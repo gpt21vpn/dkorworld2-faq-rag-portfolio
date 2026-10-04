@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% block title %}DKORWORLD2 — AI-боты и ассистенты для малого бизнеса{% endblock %}
+{% block content %}
+<section class="hero-section hero-mega" id="hero">
+    <div class="hero-orb hero-orb-one"></div><div class="hero-orb hero-orb-two"></div>
+    <div class="container hero-container">
+        <div class="hero-portfolio-grid mega-grid">
+            <div class="hero-copy-block">
+                <div class="eyebrow"><span class="pulse-dot"></span> AI-автоматизация для малого бизнеса</div>
+                <h1 class="hero-title">AI-боты и ассистенты <span class="gradient-text">для малого бизнеса.</span></h1>
+                <p class="hero-lead">Я Дмитрий, DKORWORLD2. Автоматизирую ответы, заявки и повторяющиеся процессы. При необходимости дополняю решение сайтом, лендингом и AI-видео.</p>
+                <div class="three-pill-row" aria-label="Основное и дополнительные направления">
+                    <a href="#services" class="three-pill"><i class="bi bi-robot"></i><span>AI-автоматизация</span></a>
+                    <a href="#services" class="three-pill"><i class="bi bi-camera-reels"></i><span>AI-видео</span></a>
+                    <a href="#services" class="three-pill"><i class="bi bi-window-stack"></i><span>Сайты</span></a>
+                </div>
+                <div class="hero-actions">
+                    <a href="{{ url_for('quiz') }}" class="btn btn-primary btn-lg">Пройти квиз <i class="bi bi-arrow-right"></i></a>
+                    <a href="#proof" class="btn btn-live btn-lg"><i class="bi bi-play-circle"></i> Открыть демо</a>
+                    <a href="#contact-home" class="btn btn-ghost btn-lg">Обсудить задачу</a>
+                </div>
+                <div class="trust-row">
+                    <div><strong>3</strong><span>реальных кейса</span></div>
+                    <div><strong>2</strong><span>живых Telegram-бота</span></div>
+                    <div><strong>2:30</strong><span>AI-видеокейс</span></div>
+                </div>
+            </div>
+
+            <div class="portrait-stage clean-portrait" id="portrait-stage" aria-label="Интерактивная hero-композиция DKORWORLD2">
+                <div class="portrait-frame">
+                    <img src="{{ url_for('static', filename='images/hero_dmitry_city.jpg') }}" alt="Иллюстрация Дмитрия DKORWORLD2" class="portrait-image">
+                    <div class="portrait-shade"></div><div class="portrait-scan"></div>
+                </div>
+                <a class="hand-orb" id="hand-orb" href="#proof" aria-label="Перейти к демонстрациям">
+                    <span class="orb-halo"></span>
+                    <span class="orb-shell"><span class="orb-texture"></span><span class="orb-meridian orb-m1"></span><span class="orb-meridian orb-m2"></span><span class="orb-equator"></span><span class="orb-label"><small>DKOR</small><strong>AI</strong></span></span>
+                    <span class="orb-caption">нажми</span>
+                </a>
+                <div class="satellite-orbit clean-orbit" aria-label="Быстрые переходы">
+                    <div class="sat-slot" style="--a:0deg"><a href="#services" class="sat-link"><span class="sat-inner"><i class="bi bi-grid"></i><b>Направления</b></span></a></div>
+                    <div class="sat-slot" style="--a:90deg"><a href="#voice-demo" class="sat-link"><span class="sat-inner"><i class="bi bi-mic"></i><b>Voice</b></span></a></div>
+                    <div class="sat-slot" style="--a:180deg"><a href="{{ url_for('quiz') }}" class="sat-link"><span class="sat-inner"><i class="bi bi-ui-checks-grid"></i><b>Квиз</b></span></a></div>
+                    <div class="sat-slot" style="--a:270deg"><a href="#cases-home" class="sat-link"><span class="sat-inner"><i class="bi bi-briefcase"></i><b>Кейсы</b></span></a></div>
+                </div>
+                <div class="hero-live-strip clean-live-strip">
+                    <a href="https://t.me/carsautohelperAibot" target="_blank" rel="noopener"><span class="status-dot"></span><div><small>LIVE</small><strong>AutoNeuro</strong></div><i class="bi bi-arrow-up-right"></i></a>
+                    <a href="https://t.me/astronum108bot" target="_blank" rel="noopener"><span class="status-dot"></span><div><small>LIVE</small><strong>Консультации</strong></div><i class="bi bi-arrow-up-right"></i></a>
+                    <a href="https://www.youtube.com/@Dkorworld2" target="_blank" rel="noopener"><span class="video-dot"></span><div><small>VIDEO</small><strong>Портфолио</strong></div><i class="bi bi-arrow-up-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-soft" id="services">
+    <div class="container">
+        <div class="section-heading"><span class="kicker">Основное + дополнительные направления</span><h2>Сначала автоматизация — дальше всё, что нужно вокруг неё</h2><p>Основная специализация — AI-боты и ассистенты. Сайт, лендинг и AI-видео подключаю как дополнительные части решения, когда они нужны задаче.</p></div>
+        <div class="equal-services-grid">
+            <article class="equal-service-card tilt-card" data-tilt><div class="equal-service-icon"><i class="bi bi-robot"></i></div><span class="service-label">01 · Основное направление</span><h3>AI-боты и ассистенты</h3><p>Консультации по материалам компании, заявки, голос, фото, запись, оплата и передача данных в CRM или владельцу.</p><div class="case-chips"><span>Telegram</span><span>LLM</span><span>RAG</span><span>Voice</span></div><a href="#proof" class="mini-link">Посмотреть живое демо <i class="bi bi-arrow-down"></i></a></article>
+            <article class="equal-service-card tilt-card" data-tilt><div class="equal-service-icon"><i class="bi bi-camera-reels"></i></div><span class="service-label">02 · Дополнительно</span><h3>AI-видео и проморолики</h3><p>Концепция, тестовые кадры, генерация сцен, озвучка, монтаж и финальная сборка под рекламу и соцсети.</p><div class="case-chips"><span>Veo</span><span>Sora</span><span>Kling</span><span>Монтаж</span></div><a href="https://www.youtube.com/@Dkorworld2" target="_blank" rel="noopener" class="mini-link">Открыть видеоработы <i class="bi bi-arrow-up-right"></i></a></article>
+            <article class="equal-service-card tilt-card" data-tilt><div class="equal-service-icon"><i class="bi bi-window-stack"></i></div><span class="service-label">03 · Дополнительно</span><h3>Сайты и лендинги</h3><p>Адаптивные страницы под продукт или услугу, формы и квизы, интерактив, подключение AI-консультанта и заявок.</p><div class="case-chips"><span>Flask</span><span>HTML</span><span>Квиз</span><span>AI chat</span></div><a href="#quiz-preview" class="mini-link">Посмотреть интерактив <i class="bi bi-arrow-down"></i></a></article>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="benefits">
+    <div class="container">
+        <div class="section-heading"><span class="kicker">Польза</span><h2>Что получает клиент</h2><p>Без неподтверждённых процентов: только понятные изменения в процессе.</p></div>
+        <div class="benefit-grid">
+            <article class="benefit-card tilt-card" data-tilt><span class="benefit-num">01</span><i class="bi bi-clock-history"></i><h3>Ответы вне графика</h3><p>Бот может отвечать на типовые вопросы в любое время суток, без привязки к графику менеджера.</p></article>
+            <article class="benefit-card tilt-card" data-tilt><span class="benefit-num">02</span><i class="bi bi-search"></i><h3>Меньше ручного поиска</h3><p>Прайс, правила и условия можно получать из базы знаний вместо повторного поиска по файлам.</p></article>
+            <article class="benefit-card tilt-card" data-tilt><span class="benefit-num">03</span><i class="bi bi-inboxes"></i><h3>Заявки структурированы</h3><p>Обращения можно сохранять, передавать владельцу или в CRM и не терять по разным каналам.</p></article>
+            <article class="benefit-card tilt-card" data-tilt><span class="benefit-num">04</span><i class="bi bi-megaphone"></i><h3>Предложение видно</h3><p>Видео и лендинг помогают быстро показать услугу, кейсы и следующий шаг без длинной переписки.</p></article>
+        </div>
+    </div>
+</section>
+
+<section class="section section-proof" id="proof">
+    <div class="container">
+        <div class="proof-shell">
+            <div class="proof-copy"><span class="kicker">Демо</span><h2>Можно не верить на слово — можно открыть</h2><p>Два Telegram-бота доступны как живые примеры, а видеоработы — в портфолио.</p></div>
+            <div class="proof-cards">
+                <a class="proof-card tilt-card" data-tilt href="https://t.me/carsautohelperAibot" target="_blank" rel="noopener"><span class="proof-icon"><i class="bi bi-car-front"></i></span><div><small>LIVE DEMO</small><strong>AutoNeuro</strong><span>СТО · прайс · запись · фото · голос</span></div><i class="bi bi-arrow-up-right proof-arrow"></i></a>
+                <a class="proof-card tilt-card" data-tilt href="https://t.me/astronum108bot" target="_blank" rel="noopener"><span class="proof-icon"><i class="bi bi-stars"></i></span><div><small>LIVE DEMO</small><strong>Консультации</strong><span>запись · оплата · CRM</span></div><i class="bi bi-arrow-up-right proof-arrow"></i></a>
+                <a class="proof-card tilt-card" data-tilt href="https://www.youtube.com/@Dkorworld2" target="_blank" rel="noopener"><span class="proof-icon"><i class="bi bi-youtube"></i></span><div><small>VIDEO</small><strong>DKORWORLD2</strong><span>AI-видео · визуальные проекты</span></div><i class="bi bi-arrow-up-right proof-arrow"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section voice-demo-section" id="voice-demo">
+    <div class="container">
+        <div class="voice-demo-shell">
+            <div class="voice-demo-copy"><span class="kicker">Voice demo</span><h2>Скажите вопрос голосом</h2><p>Нажмите микрофон и задайте вопрос об услугах или кейсах. При подключённом серверном режиме запись распознаётся через Groq; в тестовом режиме сайт может использовать распознавание речи браузера.</p><div class="voice-suggestions"><button type="button" data-voice-example="Какие боты ты делаешь?">Какие боты?</button><button type="button" data-voice-example="Покажи кейс для СТО">Кейс СТО</button><button type="button" data-voice-example="Что входит в создание сайта?">Про сайты</button></div></div>
+            <div class="voice-console tilt-card" data-tilt>
+                <div class="voice-console-top"><span class="status-dot"></span><strong id="voice-provider">VOICE READY</strong><span id="voice-status">Нажмите микрофон</span></div>
+                <button class="voice-record-btn" id="voice-record-btn" type="button" aria-label="Начать запись"><span class="voice-ring"></span><i class="bi bi-mic-fill"></i></button>
+                <div class="voice-wave" id="voice-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                <div class="voice-output"><small>Распознано</small><p id="voice-transcript">Здесь появится ваш вопрос.</p></div>
+                <div class="voice-output answer"><small>Ответ ассистента</small><p id="voice-answer">После распознавания вопрос автоматически уйдёт в чат-консультант.</p></div>
+                <div class="voice-speak-row">
+                    <label class="voice-speak-toggle"><input type="checkbox" id="voice-speak-toggle"><span><i class="bi bi-volume-up"></i> Озвучивать ответы</span></label>
+                    <button type="button" class="btn btn-ghost btn-sm" id="voice-speak-stop"><i class="bi bi-stop-fill"></i> Стоп</button>
+                </div>
+                <p class="voice-note">Пока вы говорите, текст показывается серым — это черновик браузера. Точную расшифровку присылает сервер, и она заменяет черновик. Пауза до 5 секунд речь не прерывает; после неё запись закрывается.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section quiz-preview-section" id="quiz-preview">
+    <div class="container">
+        <div class="quiz-preview-shell">
+            <div><span class="kicker">Квиз</span><h2>5 вопросов вместо длинного ТЗ</h2><p>Квиз помогает понять, кто вы, в какой нише работаете, что нужно, насколько готова задача и какой бюджет рассматриваете.</p><div class="quiz-preview-steps"><span>1 Кто вы?</span><span>2 Ниша</span><span>3 Что нужно?</span><span>4 Готовность</span><span>5 Бюджет</span></div><a href="{{ url_for('quiz') }}" class="btn btn-primary btn-lg">Пройти квиз <i class="bi bi-arrow-right"></i></a></div>
+            <div class="quiz-preview-card tilt-card" data-tilt><div class="quiz-mini-progress"><span></span></div><strong>Что вам нужно?</strong><div class="quiz-mini-options"><span><i class="bi bi-camera-reels"></i> AI-проморолик</span><span><i class="bi bi-robot"></i> AI-бот</span><span><i class="bi bi-window"></i> Лендинг</span><span><i class="bi bi-layers"></i> Комплекс</span></div><small>Полная версия открывается на отдельной странице; ответы автоматически добавятся к заявке.</small></div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-cases" id="cases-home">
+    <div class="container">
+        <div class="section-heading d-flex flex-column flex-lg-row justify-content-between align-items-lg-end gap-3"><div><span class="kicker">Кейсы</span><h2>Три реальные работы</h2><p>AutoNeuro — один из кейсов, без искусственного выделения его как «главного».</p></div><a href="{{ url_for('cases') }}" class="text-link">Все кейсы <i class="bi bi-arrow-up-right"></i></a></div>
+        <div class="case-showcase-grid three-case-grid">
+            <article class="showcase-card tilt-card" data-tilt><div class="case-visual case-photo"><img src="{{ url_for('static', filename='images/autoneuro/engine.jpg') }}" alt="Автомобильный кейс AutoNeuro"><span class="visual-badge">AutoNeuro</span></div><div class="showcase-body"><span class="case-tag">Автобизнес</span><h3>AI-бот для СТО и магазина автозапчастей</h3><p>Запись на сервис, прайс, фото и голос, трейд-ин, вакансии и структурированные заявки владельцу.</p><div class="case-chips"><span>СТО</span><span>Фото + голос</span><span>Трейд-ин</span></div><a href="{{ url_for('case_detail', case_id='autoneuro') }}" class="btn btn-outline-primary">Подробнее</a></div></article>
+            <article class="showcase-card tilt-card" data-tilt><div class="case-visual case-visual-astro"><div class="mini-dashboard"><div><i class="bi bi-person-check"></i><span>Запись</span></div><div><i class="bi bi-credit-card"></i><span>Оплата</span></div><div><i class="bi bi-kanban"></i><span>CRM</span></div></div><span class="visual-badge">@astronum108bot</span></div><div class="showcase-body"><span class="case-tag">Частный специалист</span><h3>Бот для консультаций, записи и оплаты</h3><p>Первичное общение, запись, ЮKassa и передача заявки в Битрикс24 без ручного переноса данных.</p><div class="case-chips"><span>ЮKassa</span><span>Битрикс24</span><span>Telegram</span></div><a href="{{ url_for('case_detail', case_id='astro_bot') }}" class="btn btn-outline-primary">Подробнее</a></div></article>
+            <article class="showcase-card tilt-card" data-tilt><div class="case-visual case-visual-image"><img src="{{ url_for('static', filename='images/promo_montage.png') }}" alt="Кадры AI-промороликов DKORWORLD2"></div><div class="showcase-body"><span class="case-tag">AI-видео</span><h3>Проморолик 2:30 по сценарию заказчика</h3><p>Тестовые кадры, согласование визуального языка, генерация, озвучка, монтаж и финальная сборка.</p><div class="case-chips"><span>2:30</span><span>6 итераций</span><span>22.04.2026</span></div><a href="{{ url_for('case_detail', case_id='promo_video') }}" class="btn btn-outline-primary">Подробнее</a></div></article>
+        </div>
+    </div>
+</section>
+
+<section class="section autoneuro-gallery-section">
+    <div class="container">
+        <div class="section-heading"><span class="kicker">Фрагмент автобизнес-кейса</span><h2>Из AutoNeuro беру только то, что усиливает портфолио</h2><p>Реальные сценарии вокруг сервиса, диагностики и клиентского пути — без превращения всего сайта в сайт СТО.</p></div>
+        <div class="autoneuro-gallery">
+            <figure class="gallery-card tilt-card" data-tilt><img src="{{ url_for('static', filename='images/autoneuro/engine.jpg') }}" alt="Диагностика автомобиля"><figcaption>СТО и диагностика</figcaption></figure>
+            <figure class="gallery-card tilt-card" data-tilt><img src="{{ url_for('static', filename='images/autoneuro/road.jpg') }}" alt="Автомобильная дорога"><figcaption>Клиентский путь и подбор</figcaption></figure>
+            <figure class="gallery-card tilt-card" data-tilt><img src="{{ url_for('static', filename='images/autoneuro/exhaust.jpg') }}" alt="Выхлоп автомобиля"><figcaption>Технические вопросы и обслуживание</figcaption></figure>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="process"><div class="container"><div class="section-heading"><span class="kicker">Процесс</span><h2>Как я работаю</h2><p>Сначала задача и ожидаемый результат. Инструменты — после.</p></div><div class="process-line"><div class="process-step"><span>1</span><div><h3>Короткий бриф</h3><p>Разбираю бизнес, аудиторию, текущую проблему и результат.</p></div></div><div class="process-step"><span>2</span><div><h3>Прототип</h3><p>Показываю рабочую логику или визуальное направление до финальной сборки.</p></div></div><div class="process-step"><span>3</span><div><h3>Проверка</h3><p>Тестирую сценарии, ошибки, мобильную версию и понятность для клиента.</p></div></div><div class="process-step"><span>4</span><div><h3>Передача</h3><p>Передаю результат, доступы и краткую инструкцию по дальнейшей работе.</p></div></div></div></div></section>
+
+<section class="section own-projects-section" id="own-projects">
+  <div class="container">
+    <div class="section-heading">
+      <span class="kicker">Свои проекты</span>
+      <h2>Собственные AI-проекты и эксперименты</h2>
+      <p>Это не клиентские работы, а то, что я собирал сам — чтобы проверять подходы до того, как применять их у заказчика.</p>
+    </div>
+    <div class="own-grid">
+      {% for p in own_projects %}
+      <article class="own-card tilt-card" data-tilt>
+        <i class="bi {{ p.icon }}"></i>
+        <span class="own-stack">{{ p.stack }}</span>
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.text }}</p>
+        {% if p.link %}<a class="text-link" href="{{ p.link }}" target="_blank" rel="noopener">{{ p.link_label }} <i class="bi bi-arrow-up-right"></i></a>{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section booking-cta-section" id="booking-cta">
+  <div class="container">
+    <div class="booking-cta">
+      <div>
+        <span class="kicker">Запись</span>
+        <h2>Часовая консультация по видеосвязи</h2>
+        <p>Свободные слоты каждый день с 9:00 до 21:00 по московскому времени. Разберём задачу и решим, нужен ли вам AI вообще.</p>
+      </div>
+      <a href="{{ url_for('booking_page') }}" class="btn btn-primary btn-lg">Выбрать время <i class="bi bi-calendar-check"></i></a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft" id="reviews"><div class="container"><div class="section-heading"><span class="kicker">Отзывы</span><h2>Что говорят заказчики</h2><p>Только реальные отзывы из портфолио.</p></div><div class="reviews-grid">{% for review in reviews %}<article class="review-card tilt-card" data-tilt><i class="bi bi-quote quote-mark"></i><p>{{ review.text }}</p><div class="review-person"><img src="{{ url_for('static', filename='images/' ~ review.image) }}" alt="{{ review.name }}"><div><strong>{{ review.name }}</strong><span>{{ review.role }}</span></div></div></article>{% endfor %}</div></div></section>
+
+<section class="section contact-home" id="contact-home"><div class="container"><div class="contact-shell"><div class="contact-intro"><span class="kicker">Связаться</span><h2>Расскажите о задаче</h2><p>Можно без технического задания. Напишите, что хотите получить: бота, видео, сайт или связку нескольких решений.</p><div class="contact-direct"><a href="https://t.me/dimaseo2" target="_blank" rel="noopener"><i class="bi bi-telegram"></i> @dimaseo2</a><a href="mailto:seodom222@gmail.com"><i class="bi bi-envelope"></i> seodom222@gmail.com</a></div></div><div class="contact-form-card"><form method="POST" action="{{ url_for('contact') }}" id="contactFormHome">{{ form.hidden_tag() }}<div class="form-row"><div>{{ form.name.label(class="form-label") }}{{ form.name(class="form-control", placeholder="Как к вам обращаться") }}</div><div>{{ form.email.label(class="form-label") }}{{ form.email(class="form-control", placeholder="name@example.com") }}</div></div><div class="form-row"><div>{{ form.phone.label(class="form-label") }}{{ form.phone(class="form-control", placeholder="+7 (999) 123-45-67") }}</div><div>{{ form.subject.label(class="form-label") }}{{ form.subject(class="form-select") }}</div></div><div>{{ form.message.label(class="form-label") }}{{ form.message(class="form-control", rows="5", placeholder="Например: нужен Telegram-бот для консультаций и приёма заявок, плюс простой лендинг.") }}</div><button type="submit" class="btn btn-primary btn-lg w-100 mt-3">Отправить задачу <i class="bi bi-send"></i></button></form></div></div></div></section>
+{% endblock %}

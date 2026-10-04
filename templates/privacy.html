@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Обработка данных — DKORWORLD2{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container"><span class="kicker">Данные</span><h1>Краткая информация об обработке заявок</h1><p>Форма и квиз используются только для связи по вашему запросу.</p></div></section>
+<section class="section pt-0"><div class="container"><div class="case-story"><h2>Что собирается</h2><p>Имя, контактные данные, выбранные ответы квиза и текст сообщения, которые пользователь вводит самостоятельно.</p><h2>Зачем</h2><p>Чтобы разобрать запрос, связаться с пользователем и подготовить предложение по задаче.</p><h2>Где хранится</h2><p>В текущей Flask-версии заявки сохраняются в локальной базе SQLite на сервере сайта. Если владелец настроит Telegram-уведомления, копия заявки может отправляться ему через Telegram Bot API.</p><h2>Как запросить удаление</h2><p>Напишите на <a href="mailto:seodom222@gmail.com">seodom222@gmail.com</a> или в Telegram <a href="https://t.me/dimaseo2" target="_blank" rel="noopener">@dimaseo2</a>.</p><p class="text-muted-custom small">Перед публичным коммерческим запуском текст политики нужно сверить с фактической схемой хранения данных и юридическими требованиями вашей деятельности.</p></div></div></section>
+{% endblock %}

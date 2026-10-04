@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Подтверждение отмены — DKORWORLD2{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <span class="kicker">Запись</span>
+    <h1>Отменить консультацию?</h1>
+    <p>Открытие этой страницы ничего не отменяет. Запись будет удалена только после нажатия кнопки ниже.</p>
+
+    <div class="booking-cancel-card mt-4">
+      <div><span>Время</span><strong>{{ booking.slot_label }}</strong></div>
+      <div><span>Имя</span><strong>{{ booking.name }}</strong></div>
+      <div><span>Контакт</span><strong>{{ booking.contact }}</strong></div>
+    </div>
+
+    <form method="POST" class="d-flex flex-wrap gap-2 mt-4">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button class="btn btn-danger btn-lg" type="submit">
+        Да, отменить запись
+      </button>
+      <a href="{{ url_for('booking_page') }}" class="btn btn-ghost btn-lg">Оставить запись</a>
+    </form>
+  </div>
+</section>
+{% endblock %}

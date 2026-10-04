@@ -1,0 +1,2 @@
+# Every day at 03:20. Edit paths if the project lives elsewhere.
+20 3 * * * cd /opt/dkorworld2 && /opt/dkorworld2/.venv/bin/python scripts/backup_db.py >> /var/log/dkorworld2-backup.log 2>&1

@@ -1,0 +1,49 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+.venv/
+venv/
+env/
+
+.env
+*.db
+site.db
+
+data/faiss_index.bin
+data/faqs_metadata.npy
+
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+instance/
+
+instance/runtime_secrets.env
+instance/*.db
+backups/
+
+# PECF11 generated FAISS artifacts (rebuild with python -m faq_service.build_index)
+faq_service/index/faiss_index.bin
+faq_service/index/faqs_metadata.npy
+
+# Secrets and deployment artifacts
+.env.*
+!.env.example
+*.tar
+*.tar.gz
+
+# Old local DZ8 notes
+DZ8_*.md
+
+# Local deployment helper
+UPLOAD_TO_CLOUD4BOX.ps1
+
+# Internal / obsolete project files
+MERGE_NOTES.md
+PECF11_STEP_BY_STEP.md
+VERIFY_STATUS.md
+V12_SELFTEST.txt
+deploy/dkorworld2.service
+deploy/nginx-dkorworld2.conf

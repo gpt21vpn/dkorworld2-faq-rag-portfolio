@@ -1,0 +1,6 @@
+# One local Python 3.12 environment for both the existing Flask site and PECF11 FastAPI/FAISS service.
+-r requirements.txt
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+faiss-cpu==1.8.0.post1
+numpy==1.26.4

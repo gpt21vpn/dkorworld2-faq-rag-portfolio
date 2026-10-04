@@ -1,0 +1,306 @@
+{
+  "name": "DKORWORLD2 — заявки, запись и Google Calendar V11",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "dkorworld2-lead",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "96f12be8-0487-4e37-b1b7-45acc573827a",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -760,
+        20
+      ],
+      "webhookId": "dkorworld2-lead"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "booking.created",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "outputKey": "booking_created"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "booking.cancelled",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "outputKey": "booking_cancelled"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "quiz.created",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "outputKey": "quiz"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "contact.created",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "outputKey": "contact"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "id": "afe62cf1-e01a-4c92-836b-98472f2498bf",
+      "name": "Какое событие",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -520,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "start": "={{ $('Webhook').first().json.body.payload.slot_start_msk }}",
+        "end": "={{ $('Webhook').first().json.body.payload.slot_end_msk }}",
+        "additionalFields": {
+          "summary": "=Консультация DKORWORLD2 — {{ $('Webhook').first().json.body.payload.name }}",
+          "description": "=Booking ID: {{ $('Webhook').first().json.body.payload.id }}\\nBooking ref: {{ $('Webhook').first().json.body.payload.booking_ref }}\\nКонтакт: {{ $('Webhook').first().json.body.payload.contact }}\\nЗадача: {{ $('Webhook').first().json.body.payload.comment || 'не указана' }}\\nСтраница отмены: {{ $('Webhook').first().json.body.payload.cancel_url }}"
+        }
+      },
+      "id": "1b99ebeb-c60b-4e16-b1ae-53f9fe9d384c",
+      "name": "Google Calendar — создать",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        -240,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { ok: true, event: 'booking.created', event_id: $json.id || null } }}",
+        "options": {}
+      },
+      "id": "b9674ba5-5073-47f3-b141-03554cc3e4af",
+      "name": "Ответ — booking created",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        20,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "eventId": "={{ $('Webhook').first().json.body.payload.event_id }}",
+        "options": {}
+      },
+      "id": "350849a0-807a-4754-a021-77d0284dc071",
+      "name": "Google Calendar — удалить",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        -240,
+        -40
+      ],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { ok: true, event: 'booking.cancelled', event_id: $('Webhook').first().json.body.payload.event_id || null, calendar_delete_attempted: !!$('Webhook').first().json.body.payload.event_id } }}",
+        "options": {}
+      },
+      "id": "37d53d96-460d-4df7-9bdc-9f8f4cd7c1ca",
+      "name": "Ответ — booking cancelled",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        20,
+        -40
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { ok: true, event: $json.body.event, stored_by_site: true } }}",
+        "options": {}
+      },
+      "id": "4c56665f-8706-4125-a145-cf27411fa782",
+      "name": "Ответ — lead ack",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -180,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { ok: false, ignored: true, event: $json.body?.event || 'unknown' } }}",
+        "options": {
+          "responseCode": 202
+        }
+      },
+      "id": "288f583a-1b1b-46c1-9c15-1dafa8bb95f0",
+      "name": "Ответ — unsupported",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -180,
+        240
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Какое событие",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Какое событие": {
+      "main": [
+        [
+          {
+            "node": "Google Calendar — создать",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Calendar — удалить",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ответ — lead ack",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ответ — lead ack",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ответ — unsupported",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Calendar — создать": {
+      "main": [
+        [
+          {
+            "node": "Ответ — booking created",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Calendar — удалить": {
+      "main": [
+        [
+          {
+            "node": "Ответ — booking cancelled",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

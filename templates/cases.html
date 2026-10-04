@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Реальные кейсы — DKORWORLD2{% endblock %}
+{% block content %}
+<section class="page-hero page-hero-cases"><div class="container"><span class="kicker">Портфолио</span><h1>Реальные кейсы</h1><p>Не демонстрационные проценты, а задачи, решения и результаты, которые можно объяснить и показать.</p></div></section>
+<section class="section">
+    <div class="container">
+        <div class="case-list">
+            <article class="case-list-item tilt-card" data-tilt>
+                <div class="case-list-visual case-image-panel"><img src="{{ url_for('static', filename='images/autoneuro/engine.jpg') }}" alt="AutoNeuro — кейс для СТО и автозапчастей"></div>
+                <div class="case-list-body"><span class="case-tag">Автобизнес</span><h2>AI-бот для СТО и магазина автозапчастей</h2><p>Запись на сервис, ответы по реальному прайсу, голос и фото, трейд-ин, вакансии и сравнение автомобилей. Заявки приходят владельцу структурированными карточками.</p><div class="case-chips"><span>Telegram</span><span>Фото</span><span>Голос</span><span>Статусы</span></div><div class="case-actions"><a href="{{ url_for('case_detail', case_id='autoneuro') }}" class="btn btn-primary">Открыть кейс</a><a href="https://t.me/carsautohelperAibot" target="_blank" rel="noopener" class="mini-link">Проверить бота <i class="bi bi-arrow-up-right"></i></a></div></div>
+            </article>
+            <article class="case-list-item reverse tilt-card" data-tilt>
+                <div class="case-list-visual case-visual-astro"><div class="mini-dashboard"><div><i class="bi bi-person-check"></i><span>Запись</span></div><div><i class="bi bi-credit-card"></i><span>Оплата</span></div><div><i class="bi bi-kanban"></i><span>CRM</span></div></div></div>
+                <div class="case-list-body"><span class="case-tag">Частный специалист</span><h2>Telegram-бот для консультаций, записи и оплаты</h2><p>Расчёт, запись, ЮKassa, Битрикс24 и выдача материала после оплаты объединены в один сценарий.</p><div class="case-chips"><span>ЮKassa</span><span>Битрикс24</span><span>Telegram</span></div><div class="case-actions"><a href="{{ url_for('case_detail', case_id='astro_bot') }}" class="btn btn-primary">Открыть кейс</a><a href="https://t.me/astronum108bot" target="_blank" rel="noopener" class="mini-link">Проверить бота <i class="bi bi-arrow-up-right"></i></a></div></div>
+            </article>
+            <article class="case-list-item tilt-card" data-tilt>
+                <div class="case-list-visual case-image-panel"><img src="{{ url_for('static', filename='images/promo_montage.png') }}" alt="Кадры AI-роликов DKORWORLD2"></div>
+                <div class="case-list-body"><span class="case-tag">AI-видео</span><h2>AI-проморолик 2:30</h2><p>Сначала тестовые кадры по метафоре заказчика, затем согласованный визуальный язык, генерация, озвучка, монтаж и шесть итераций правок.</p><div class="case-chips"><span>2:30</span><span>6 итераций</span><span>22.04.2026</span></div><div class="case-actions"><a href="{{ url_for('case_detail', case_id='promo_video') }}" class="btn btn-primary">Открыть кейс</a><a href="https://www.youtube.com/@Dkorworld2" target="_blank" rel="noopener" class="mini-link">Видеоработы <i class="bi bi-arrow-up-right"></i></a></div></div>
+            </article>
+        </div>
+    </div>
+</section>
+<section class="section compact-cta"><div class="container"><div class="cta-band"><div><span class="kicker">Следующий проект</span><h2>Есть похожая задача?</h2><p>Опишите текущий процесс — разберу, где автоматизация действительно имеет смысл.</p></div><a class="btn btn-light btn-lg" href="{{ url_for('contact') }}">Обсудить задачу</a></div></div></section>
+{% endblock %}

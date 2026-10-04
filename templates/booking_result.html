@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} — DKORWORLD2{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <span class="kicker">Запись</span>
+    <h1>{{ title }}</h1>
+    <p>{{ message }}</p>
+    <div class="d-flex flex-wrap gap-2 mt-4">
+      <a href="{{ url_for('booking_page') }}" class="btn btn-primary">Выбрать другое время</a>
+      <a href="{{ url_for('index') }}" class="btn btn-ghost">На главную</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

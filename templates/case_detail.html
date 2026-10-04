@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}{{ case.title }} — DKORWORLD2{% endblock %}
+{% block content %}
+<section class="page-hero case-detail-hero"><div class="container"><a class="back-link" href="{{ url_for('cases') }}"><i class="bi bi-arrow-left"></i> Все кейсы</a><span class="kicker">Реальный проект</span><h1>{{ case.title }}</h1><p>{{ case.short_description }}</p></div></section>
+<section class="section pt-0">
+    <div class="container">
+        <div class="case-detail-grid">
+            <aside class="case-side">
+                {% if case.id == 'autoneuro' %}
+                <div class="case-visual case-visual-bot detail-visual tilt-card" data-tilt><div class="phone-mock"><div class="phone-bar"></div><div class="chat-mini bot-msg">Что нужно сделать?</div><div class="chat-mini user-msg">Запишите на диагностику</div><div class="chat-mini bot-msg">Заявка сформирована ✓</div></div></div>
+                <div class="fact-box"><span>Канал</span><strong>Telegram</strong><span>Функции</span><strong>Прайс · запись · фото · голос</strong><span>Рабочий пример</span><a href="https://t.me/carsautohelperAibot" target="_blank" rel="noopener">@carsautohelperAibot</a></div>
+                <a class="btn btn-live w-100 mt-3" href="https://t.me/carsautohelperAibot" target="_blank" rel="noopener"><i class="bi bi-telegram"></i> Открыть живого бота</a>
+                {% elif case.id == 'astro_bot' %}
+                <div class="case-visual case-visual-astro detail-visual tilt-card" data-tilt><div class="mini-dashboard"><div><i class="bi bi-person-check"></i><span>Запись</span></div><div><i class="bi bi-credit-card"></i><span>Оплата</span></div><div><i class="bi bi-kanban"></i><span>CRM</span></div></div></div>
+                <div class="fact-box"><span>Канал</span><strong>Telegram</strong><span>Интеграции</span><strong>ЮKassa · Битрикс24</strong><span>Рабочий пример</span><a href="https://t.me/astronum108bot" target="_blank" rel="noopener">@astronum108bot</a></div>
+                <a class="btn btn-live w-100 mt-3" href="https://t.me/astronum108bot" target="_blank" rel="noopener"><i class="bi bi-telegram"></i> Открыть живого бота</a>
+                {% else %}
+                <div class="case-image-panel detail-image tilt-card" data-tilt><img src="{{ url_for('static', filename='images/promo_montage.png') }}" alt="Кадры AI-роликов DKORWORLD2"></div>
+                <div class="fact-box"><span>Хронометраж</span><strong>2:30</strong><span>Итерации</span><strong>6 правок</strong><span>Сдан</span><strong>22.04.2026</strong></div>
+                <a class="btn btn-live w-100 mt-3" href="https://www.youtube.com/@Dkorworld2" target="_blank" rel="noopener"><i class="bi bi-youtube"></i> Смотреть видеоработы</a>
+                {% endif %}
+            </aside>
+            <article class="case-story">{{ case.description|safe }}
+                {% if case.id == 'autoneuro' %}
+                <div class="case-extra-block">
+                    <h4>Что ещё входит в сценарий AutoNeuro</h4>
+                    <div class="case-chips"><span>СТО и диагностика</span><span>Трейд-ин</span><span>Вакансии</span><span>Сравнение авто</span><span>Фото</span><span>Голос</span></div>
+                    <div class="autoneuro-case-gallery">
+                        <img src="{{ url_for('static', filename='images/autoneuro/engine.jpg') }}" alt="Диагностика и обслуживание автомобиля">
+                        <img src="{{ url_for('static', filename='images/autoneuro/road.jpg') }}" alt="Автомобильный клиентский путь">
+                        <img src="{{ url_for('static', filename='images/autoneuro/exhaust.jpg') }}" alt="Технические вопросы автомобиля">
+                    </div>
+                </div>
+                {% endif %}
+                <div class="handoff-note">
+                    <span class="handoff-icon"><i class="bi bi-arrow-right-circle"></i></span>
+                    <div>
+                        <strong>Что дальше после сдачи</strong>
+                        {% if case.id == 'astro_bot' %}
+                        <p>Заказчица получила инструкцию и может самостоятельно менять цены без обращения к разработчику.</p>
+                        {% elif case.id == 'autoneuro' %}
+                        <p>Рабочий бот доступен как демонстрация: сценарий можно открыть и проверить напрямую в Telegram.</p>
+                        {% else %}
+                        <p>Финальная версия ролика передана заказчику после согласованных итераций правок.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </article>
+        </div>
+        <div class="case-next"><div><span class="kicker">Похожая задача</span><h2>Можно разобрать ваш сценарий</h2><p>Сначала определим, где именно теряется время или информация, и только потом выберем инструменты.</p></div><a href="{{ url_for('contact') }}" class="btn btn-primary btn-lg">Обсудить</a></div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Запись на консультацию — DKORWORLD2{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <span class="kicker">Запись</span>
+    <h1>Часовая консультация</h1>
+    <p>
+      Слоты по часу, каждый день с {{ first_hour }}:00 до {{ last_hour + 1 }}:00.
+      <strong>Все времена московские (МСК).</strong>
+      Открыта запись на {{ days_ahead }} дней вперёд, не больше {{ per_day }} слотов на человека в день.
+    </p>
+  </div>
+</section>
+
+<section class="section booking-section">
+  <div class="container">
+    <div class="booking-grid">
+      <div class="booking-days-panel">
+        <h2 class="h5 mb-3">Свободное время</h2>
+        <div id="booking-days" class="booking-days">
+          <p class="text-muted small mb-0">Загружаю свободные слоты…</p>
+        </div>
+      </div>
+
+      <div class="booking-form-panel">
+        <h2 class="h5 mb-1">Ваши данные</h2>
+        <p class="text-muted small">Выбранное время: <strong id="booking-chosen">не выбрано</strong></p>
+        <form id="booking-form" novalidate>
+          <input type="hidden" id="booking-slot" value="">
+          <div class="mb-3">
+            <label class="form-label" for="booking-name">Имя</label>
+            <input class="form-control" id="booking-name" maxlength="100" placeholder="Как к вам обращаться" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="booking-contact">Телефон или Telegram</label>
+            <input class="form-control" id="booking-contact" maxlength="160" placeholder="+7 (999) 123-45-67 или @username" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="booking-comment">О задаче (необязательно)</label>
+            <textarea class="form-control" id="booking-comment" rows="4" maxlength="1000"
+              placeholder="Например: СТО, заявки приходят в Telegram и WhatsApp, часть теряется."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg w-100" id="booking-submit" disabled>
+            Записаться <i class="bi bi-calendar-check"></i>
+          </button>
+          <p class="form-text mt-2 mb-0">Ссылка на отмену придёт сразу после записи — отменить можно самостоятельно.</p>
+        </form>
+        <div id="booking-result" class="booking-result d-none"></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/booking.js', v='11.0.0') }}"></script>
+{% endblock %}

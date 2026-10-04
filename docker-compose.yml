@@ -1,0 +1,55 @@
+﻿services:
+  dkorworld2-faq-rag:
+    image: dkorworld/portfolio-faq-rag:13.4
+    build:
+      context: .
+      dockerfile: faq_service/Dockerfile
+    container_name: dkorworld2-faq-rag
+    env_file:
+      - .env
+    restart: unless-stopped
+    expose:
+      - "8011"
+    networks:
+      - app_net
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request, json; d=json.load(urllib.request.urlopen('http://127.0.0.1:8011/health', timeout=8)); assert d.get('status') == 'ok'"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 45s
+
+  dkorworld2-site:
+    image: dkorworld/portfolio-site:13.4
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dkorworld2-site
+    env_file:
+      - .env
+    environment:
+      FAQ_RAG_URL: http://dkorworld2-faq-rag:8011
+      FAQ_RAG_TIMEOUT: "45"
+    restart: unless-stopped
+    volumes:
+      - ./instance:/app/instance
+    depends_on:
+      dkorworld2-faq-rag:
+        condition: service_healthy
+    networks:
+      - caddy_net
+      - app_net
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8008/api/health', timeout=5).read()"]
+      interval: 30s
+      timeout: 8s
+      retries: 3
+      start_period: 20s
+
+networks:
+  caddy_net:
+    external: true
+    name: n8n-automation_default
+
+  app_net:
+    driver: bridge

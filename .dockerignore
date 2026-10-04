@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+*.pyo
+*.tar.gz
+instance/*
+backups/
+.git/
+.vscode/
+.venv/
+venv/
+*.tar

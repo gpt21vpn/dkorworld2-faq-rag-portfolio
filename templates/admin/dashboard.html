@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DKORWORLD2 — заявки</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<style>body{background:#0b1018;color:#e8eef7}.card{background:#121a27;border-color:#273348;color:#e8eef7}.table{--bs-table-bg:#121a27;--bs-table-color:#dbe6f4;--bs-table-border-color:#273348}.muted{color:#8ea0b5}.answer-chip{display:inline-block;padding:3px 7px;margin:2px;border-radius:999px;background:#1b2740;font-size:.72rem}.table-warning{--bs-table-bg:#2c2817!important;--bs-table-color:#fff}.stat{border-radius:18px;padding:18px;background:linear-gradient(135deg,#202a43,#121927);border:1px solid #2d3a51}.stat strong{font-size:2rem;display:block}</style>
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark"><div class="container-fluid"><a class="navbar-brand" href="{{ url_for('admin_dashboard') }}"><i class="bi bi-shield-lock"></i> DKORWORLD2 · заявки</a><div><a href="{{ url_for('index') }}" class="btn btn-outline-light btn-sm me-2">На сайт</a><a href="{{ url_for('admin_logout') }}" class="btn btn-outline-danger btn-sm">Выход</a></div></div></nav>
+<div class="container-fluid py-4">
+<div class="row g-3 mb-4"><div class="col-md-3"><div class="stat"><span class="muted">Форма</span><strong>{{ total_count }}</strong></div></div><div class="col-md-3"><div class="stat"><span class="muted">Новые из формы</span><strong>{{ unread_count }}</strong></div></div><div class="col-md-3"><div class="stat"><span class="muted">Квиз</span><strong>{{ quiz_total_count }}</strong></div></div><div class="col-md-3"><div class="stat"><span class="muted">Новые из квиза</span><strong>{{ quiz_unread_count }}</strong></div></div></div>
+<div class="card mb-4"><div class="card-header"><strong><i class="bi bi-activity"></i> Системный статус</strong></div><div class="card-body"><div class="row g-3"><div class="col-md-3"><div class="stat"><span class="muted">База знаний</span><strong>{{ system_status.knowledge_base_items }}</strong><small>карточек</small></div></div><div class="col-md-3"><div class="stat"><span class="muted">RAG + LLM</span><strong>{{ 'ON' if system_status.rag else 'KB' }}</strong><small>{{ 'OpenAI подключён' if system_status.rag else 'локальный режим' }}</small></div></div><div class="col-md-3"><div class="stat"><span class="muted">Voice</span><strong>{{ 'GROQ' if system_status.groq else 'WEB' }}</strong><small>{{ 'Whisper server' if system_status.groq else 'browser fallback' }}</small></div></div><div class="col-md-3"><div class="stat"><span class="muted">Заявки в TG</span><strong>{{ 'ON' if system_status.telegram else 'OFF' }}</strong><small>{{ 'копия в Telegram' if system_status.telegram else 'в SQLite/админке' }}</small></div></div></div></div></div>
+
+<div class="card mb-4"><div class="card-header"><strong><i class="bi bi-calendar-check"></i> Записи на консультацию <span class="muted">(время МСК)</span></strong>
+{% if bookings %}<form method="POST" action="{{ url_for('clear_bookings') }}" class="d-inline float-end" onsubmit="return confirm('Удалить ВСЕ записи ({{ bookings|length }})? Действие необратимо.')"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn btn-sm btn-outline-danger" type="submit"><i class="bi bi-trash"></i> Очистить все</button></form>{% endif %}</div><div class="card-body">
+{% if bookings %}<div class="table-responsive"><table class="table table-hover align-middle"><thead><tr><th>Время (МСК)</th><th>Имя</th><th>Контакт</th><th>О задаче</th><th>Создана</th><th>Calendar</th><th></th></tr></thead><tbody>{% for b in bookings %}<tr><td><strong>{{ b.slot_label }}</strong></td><td>{{ b.name }}</td><td>{{ b.contact }}</td><td>{{ b.comment or '—' }}</td><td>{{ b.created_at.strftime('%d.%m %H:%M') }}</td>
+<td>
+{% if b.calendar_event_id %}
+<span class="badge text-bg-success">sync</span>
+{% else %}
+<span class="badge text-bg-secondary">local</span>
+{% endif %}
+</td><td><form method="POST" action="{{ url_for('delete_booking', booking_id=b.id) }}" onsubmit="return confirm('Отменить запись {{ b.slot_label }}?')">{{ csrf_form_field if false }}<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn btn-sm btn-outline-danger" type="submit"><i class="bi bi-x-lg"></i></button></form></td></tr>{% endfor %}</tbody></table></div>{% else %}<p class="muted mb-0">Записей пока нет.</p>{% endif %}
+</div></div>
+
+<div class="card mb-4"><div class="card-header"><strong><i class="bi bi-ui-checks-grid"></i> Заявки из квиза</strong></div><div class="card-body">
+{% if quiz_leads %}<div class="table-responsive"><table class="table table-hover align-middle"><thead><tr><th>ID</th><th>Имя</th><th>Контакт</th><th>Ответы</th><th>Комментарий</th><th>Дата</th><th></th></tr></thead><tbody>{% for lead in quiz_leads %}<tr class="{% if not lead.is_read %}table-warning{% endif %}"><td>{{ lead.id }}</td><td>{{ lead.name }}</td><td>{{ lead.contact }}</td><td>{% for k,v in lead.answers.items() %}<span class="answer-chip">{{ k }}: {{ v }}</span>{% endfor %}</td><td>{{ lead.comment or '—' }}</td><td>{{ lead.created_at.strftime('%d.%m.%Y %H:%M') }}</td><td>{% if not lead.is_read %}<button class="btn btn-sm btn-outline-primary quiz-read" data-id="{{ lead.id }}"><i class="bi bi-check2"></i></button>{% endif %} <button class="btn btn-sm btn-outline-danger quiz-delete" data-id="{{ lead.id }}"><i class="bi bi-trash"></i></button></td></tr>{% endfor %}</tbody></table></div>{% else %}<p class="muted mb-0">Заявок из квиза пока нет.</p>{% endif %}
+</div></div>
+
+<div class="card"><div class="card-header"><strong><i class="bi bi-inbox"></i> Обычная форма</strong></div><div class="card-body">
+{% if contacts %}<div class="table-responsive"><table class="table table-hover align-middle"><thead><tr><th>ID</th><th>Имя</th><th>Email</th><th>Телефон</th><th>Тема</th><th>Сообщение</th><th>Дата</th><th></th></tr></thead><tbody>{% for contact in contacts %}<tr class="{% if not contact.is_read %}table-warning{% endif %}"><td>{{ contact.id }}</td><td>{{ contact.name }}</td><td>{{ contact.email }}</td><td>{{ contact.phone }}</td><td>{{ contact.subject }}</td><td>{{ contact.message }}</td><td>{{ contact.created_at.strftime('%d.%m.%Y %H:%M') }}</td><td>{% if not contact.is_read %}<button class="btn btn-sm btn-outline-primary contact-read" data-id="{{ contact.id }}"><i class="bi bi-check2"></i></button>{% endif %} <button class="btn btn-sm btn-outline-danger contact-delete" data-id="{{ contact.id }}"><i class="bi bi-trash"></i></button></td></tr>{% endfor %}</tbody></table></div>{% else %}<p class="muted mb-0">Заявок из формы пока нет.</p>{% endif %}
+</div></div>
+</div>
+<script>
+const csrf=document.querySelector('meta[name="csrf-token"]')?.content||'';
+async function post(url){const r=await fetch(url,{method:'POST',headers:{'X-CSRFToken':csrf,'Content-Type':'application/json'}});if(!r.ok)throw new Error('Ошибка');return r;}
+document.querySelectorAll('.contact-read').forEach(b=>b.onclick=()=>post(`/admin/contact/${b.dataset.id}/read`).then(()=>location.reload()));
+document.querySelectorAll('.contact-delete').forEach(b=>b.onclick=()=>{if(confirm('Удалить заявку?'))post(`/admin/contact/${b.dataset.id}/delete`).then(()=>location.reload())});
+document.querySelectorAll('.quiz-read').forEach(b=>b.onclick=()=>post(`/admin/quiz/${b.dataset.id}/read`).then(()=>location.reload()));
+document.querySelectorAll('.quiz-delete').forEach(b=>b.onclick=()=>{if(confirm('Удалить заявку из квиза?'))post(`/admin/quiz/${b.dataset.id}/delete`).then(()=>location.reload())});
+</script>
+</body></html>
